@@ -316,4 +316,30 @@ public class Solution {
         }
         return -1;
     }
+
+    // [74] 搜索二维矩阵
+    // 二分查找
+    public bool SearchMatrix (int[][] matrix, int target) {
+        int m = matrix.Length;
+        if (m == 0) return false;
+        int n = matrix[0].Length;
+        // 二维有序数组，同样适用二分查找方式
+        int left = 0, right = m * n - 1;
+        int mid;
+        while (left <= right) {
+            mid = left + (right - left) / 2;
+            int row = mid / n;
+            int col = mid % n;
+            if (matrix[row][col] == target) {
+                return true;
+            }
+
+            if (target < matrix[row][col]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return false;
+    }
 }
